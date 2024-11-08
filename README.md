@@ -4,6 +4,8 @@ A collection of demo projects that I think will be awesome on the upcoming [Godo
 * Apple pencil handling
   * Hover
   * Orientation
+  * Interpolation
+  * Prediction
 
 * Touch/gesture handling
   * Smooth camera orbitting
