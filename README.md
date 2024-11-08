@@ -16,7 +16,7 @@ A collection of demo projects that I think will be awesome on the upcoming [Godo
   * Accelerometer
 
 * Stunning and colorful VFX
- * Make the most out of the beautiful screen
+  * Make the most out of the beautiful screen
 * EditorPlugin potential
 * UI exploration
 
