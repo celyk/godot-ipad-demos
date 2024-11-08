@@ -2,11 +2,16 @@ A collection of demo projects that I think will be awesome on the upcoming [Godo
 
 # Goals
 * Apple pencil handling
-⋅⋅* Hover
-⋅⋅* Orientation
+  * Hover
+  * Orientation
+
 * Touch/gesture handling
-⋅⋅* Smooth camera orbitting
+  * Smooth camera orbitting
+  * Zoom and pan
+
 * Sensor handling
+  * Gyro
+  * Accelerometer
 
 * Stunning and colorful VFX
 * EditorPlugin potential
