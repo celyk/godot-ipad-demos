@@ -18,7 +18,5 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	draw_multiline_colors(PackedVector2Array(points), PackedColorArray(colors), 3.0, true)
-	
-	for i in range(0,points.size()):
-		pass
+	for i in range(1,points.size()):
+		draw_line(points[i-1], points[i], colors[i], 3.0, true)
