@@ -21,6 +21,8 @@ A collection of demo projects that I think will be awesome on the upcoming [Godo
 * UI exploration
 
 # Issues
-[Gyro issue](https://github.com/godotengine/godot/issues/90901)
-[Tilt issue](https://github.com/godotengine/godot/issues/85990)
-[Touch issue](https://github.com/godotengine/godot/issues/90614)
+* [Gyro issue](https://github.com/godotengine/godot/issues/90901)
+* [Tilt issue](https://github.com/godotengine/godot/issues/85990)
+* [Touch issue](https://github.com/godotengine/godot/issues/90614)
+* [Mouse issue](https://github.com/godotengine/godot/issues/92255)
+* [Accel issue](https://github.com/godotengine/godot-docs/issues/9275)
