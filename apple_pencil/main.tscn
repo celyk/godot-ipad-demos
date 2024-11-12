@@ -1,15 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpbh6ed673ds3"]
+[gd_scene load_steps=5 format=3 uid="uid://bpbh6ed673ds3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b45ca"]
 [ext_resource type="PackedScene" uid="uid://ojf0p1kkcf34" path="res://assets/canvas/Canvas.tscn" id="2_3at1i"]
+[ext_resource type="Script" path="res://pinch_and_zoom.gd" id="2_wru0x"]
 [ext_resource type="Texture2D" uid="uid://dmim24ntfbrh6" path="res://icon.svg" id="3_m3ejv"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_b45ca")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
 
 [node name="Canvas" parent="." instance=ExtResource("2_3at1i")]
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_wru0x")
+
+[node name="Icon" type="Sprite2D" parent="Node2D"]
 texture = ExtResource("3_m3ejv")
