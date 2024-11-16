@@ -14,6 +14,8 @@ func add_point(position:Vector2, color:=Color.BLACK, width:=4.0):
 	
 	add_bezier(prev_position, prev_position, position, position)
 	colors.append(color)
+	
+	queue_redraw()
 
 func add_bezier(start:Vector2, control_1:Vector2, control_2:Vector2, end:Vector2):
 	bezier_spline += [start, control_1, control_2, end]
@@ -30,12 +32,14 @@ func smooth():
 		# Approximate derivative using secant
 		var slope := (c-a) / 2.0
 		
-		# Apply formula to compute control point from velocity
+		# Apply formula to compute control point from velocity and set the neighbouring control points
 		bezier_spline[i*4-2] = b-slope / 3.0
 		bezier_spline[i*4+1] = b+slope / 3.0
-
-func _process(delta:float) -> void:
+	
 	queue_redraw()
+
+#func _process(delta:float) -> void:
+#	queue_redraw()
 
 func _draw() -> void:
 	for i in range(1, bezier_spline.size()/4):
