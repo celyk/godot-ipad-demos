@@ -3,8 +3,10 @@ class_name PencilStroke extends Node2D
 var bezier_spline : Array[Vector2] = []
 var colors : Array[Color] = []
 
-
+var stroke_renderer := PencilStrokeRenderer.new()
 func begin():
+	add_child(stroke_renderer)
+	
 	pass
 
 func add_point(position:Vector2, color:=Color.BLACK, width:=4.0):
@@ -19,6 +21,12 @@ func add_point(position:Vector2, color:=Color.BLACK, width:=4.0):
 
 func add_bezier(start:Vector2, control_1:Vector2, control_2:Vector2, end:Vector2):
 	bezier_spline += [start, control_1, control_2, end]
+	
+	stroke_renderer.add_bezier(
+			Vector3(start.x,start.y,10), 
+			Vector3(control_1.x,control_1.y,10),
+			Vector3(control_2.x,control_1.y,10), 
+			Vector3(end.x,end.y,10))
 
 func end():
 	smooth()
@@ -39,21 +47,23 @@ func smooth():
 	queue_redraw()
 
 #func _process(delta:float) -> void:
-#	queue_redraw()
+#	queue_redraw()=
 
 func _draw() -> void:
+	#return
+	
 	for i in range(1, bezier_spline.size()/4):
 		var start : Vector2 = bezier_spline[i*4-4]
 		var control_1 : Vector2 = bezier_spline[i*4-3]
 		var control_2 : Vector2 = bezier_spline[i*4-2]
 		var end : Vector2 = bezier_spline[i*4-1]
 		
-		var pre_sub_point = start
+		var prev_sub_point = start
 		const subdivisions := 15
 		for j in range(1, subdivisions+1):
 			var t : float = j / float(subdivisions)
 			
 			var sub_point := start.bezier_interpolate(control_1, control_2, end, t)
-			draw_line(pre_sub_point, sub_point, colors[i], 1.0, true)
+			draw_line(prev_sub_point, sub_point, colors[i], 1.0, true)
 			
-			pre_sub_point = sub_point
+			prev_sub_point = sub_point

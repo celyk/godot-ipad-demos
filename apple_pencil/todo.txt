@@ -1,0 +1,8 @@
+- Line triangle strip rendering
+- Dynimac subdivision of stroke renderer - find hueristic
+- Preview stroke
+- Tilt / pressure support
+- Pinch to zoom
+- UI toggles for debug and demonstration
+- Undo/redo
+- Eraser
