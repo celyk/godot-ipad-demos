@@ -4,7 +4,7 @@ var bezier_spline : Array[Array] = []
 var colors : Array[Color] = []
 
 # Todo - apply the hueristic to optimizae the stroke rendering
-var hueristic : Callable
+var heuristic : Callable
 
 func _init() -> void:
 	mesh = ArrayMesh.new()
