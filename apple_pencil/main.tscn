@@ -11,10 +11,10 @@ script = ExtResource("1_b45ca")
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
 
-[node name="Canvas" parent="." instance=ExtResource("2_3at1i")]
-
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("2_wru0x")
 
 [node name="Icon" type="Sprite2D" parent="Node2D"]
 texture = ExtResource("3_m3ejv")
+
+[node name="Canvas" parent="Node2D" instance=ExtResource("2_3at1i")]

@@ -15,10 +15,27 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
 [rendering]
 
 renderer/rendering_method="mobile"
+anti_aliasing/quality/msaa_2d=2
+
+[xogot]
+
+project/editorState=[{
+"column": 17,
+"line": 74,
+"path": "res://assets/canvas/Stroke.gd",
+"type": "file"
+}, {
+"column": 25,
+"current": true,
+"line": 61,
+"path": "res://assets/canvas/StrokeRenderer.gd",
+"type": "file"
+}]
+project/breakpoints={
+"res://assets/canvas/Stroke.gd": PackedInt32Array(49),
+"res://assets/canvas/StrokeRenderer.gd": PackedInt32Array(),
+"res://pinch_and_zoom.gd": PackedInt32Array()
+}

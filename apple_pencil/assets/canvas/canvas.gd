@@ -12,27 +12,31 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
-			if event.pressed:
+			if event.pressed and preview_stroke == null:
 				create_stroke(event)
-			else:
+			elif not event.pressed and preview_stroke != null:
 				submit_stroke(event)
 	elif event is InputEventScreenDrag and preview_stroke != null:
-			update_stroke(event)
+			if is_stylus(event):
+				update_stroke(event)
+			else:
+				pass
 
 func create_stroke(event: InputEvent):
 	preview_stroke = PencilStroke.new()
+	
 	preview_stroke.begin()
 	preview_stroke.add_point(_screen_to_local(event.position))
 	
-	add_child(preview_stroke)
+	get_parent().add_child(preview_stroke)
 
 func update_stroke(event: InputEventScreenDrag):
-	preview_stroke.add_point(_screen_to_local(event.position))
+	preview_stroke.add_point(_screen_to_local(event.position),Color.BLUE_VIOLET,event.pressure*30.0)
 
 func submit_stroke(event: InputEvent):
 	preview_stroke.end()
 	
-	remove_child(preview_stroke)
+	get_parent().remove_child(preview_stroke)
 	get_parent().add_child(preview_stroke)
 	strokes.append(preview_stroke)
 	
