@@ -65,7 +65,7 @@ func refresh():
 			
 		
 			var sub_point := start.bezier_interpolate(control_1, control_2, end, t)
-			sub_point.z = (start.lerp(end,t)).z
+			#sub_point.z = (start.lerp(end,t)).z
 			var sub_tangent := start.bezier_derivative(control_1, control_2, end, t)
 			
 			var sub_normal = _Vector2(sub_tangent)
