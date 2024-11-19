@@ -90,7 +90,7 @@ func smooth():
 #	queue_redraw()=
 
 func _draw() -> void:
-	#return
+	return
 	
 	for i in range(1, bezier_spline.size()):
 		var start : Vector2 = (bezier_spline[i][0])

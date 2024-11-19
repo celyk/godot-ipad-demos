@@ -31,7 +31,12 @@ func create_stroke(event: InputEvent):
 	get_parent().add_child(preview_stroke)
 
 func update_stroke(event: InputEventScreenDrag):
-	preview_stroke.add_point(_screen_to_local(event.position),Color.BLUE_VIOLET,event.pressure*30.0)
+	var width : float = event.pressure * 30.0
+	width *= 1.0 / (get_parent().global_transform as Transform2D)[0].length()
+	
+	print(get_parent().global_transform)
+	
+	preview_stroke.add_point(_screen_to_local(event.position), Color.BLUE_VIOLET, width)
 
 func submit_stroke(event: InputEvent):
 	preview_stroke.end()

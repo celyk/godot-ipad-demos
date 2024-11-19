@@ -23,33 +23,22 @@ anti_aliasing/quality/msaa_2d=2
 [xogot]
 
 project/editorState=[{
-"column": 0,
-"line": 0,
-"path": "res://assets/canvas/Stroke.gd",
-"type": "file"
-}, {
-"column": 7,
-"line": 6,
-"path": "res://assets/canvas/StrokeRenderer.gd",
-"type": "file"
-}, {
-"column": 1,
-"line": 13,
+"column": 74,
+"line": 34,
 "path": "res://assets/canvas/canvas.gd",
 "type": "file"
 }, {
-"title": "CanvasItem",
-"type": "doc"
-}, {
-"column": 20,
+"column": 1,
 "current": true,
-"line": 14,
-"path": "res://stylus_debug.gd",
+"line": 92,
+"path": "res://assets/canvas/Stroke.gd",
 "type": "file"
 }]
 project/breakpoints={
 "res://assets/canvas/Stroke.gd": PackedInt32Array(49),
 "res://assets/canvas/StrokeRenderer.gd": PackedInt32Array(),
+"res://assets/canvas/canvas.gd": PackedInt32Array(),
 "res://main.gd": PackedInt32Array(),
-"res://pinch_and_zoom.gd": PackedInt32Array()
+"res://pinch_and_zoom.gd": PackedInt32Array(),
+"res://stylus_debug.gd": PackedInt32Array()
 }
