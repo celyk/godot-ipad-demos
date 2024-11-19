@@ -1,4 +1,4 @@
-class_name PencilStrokeRenderer extends MeshInstance2D
+class_name PencilStrokeRendererImmediate extends MeshInstance2D
 
 # Array of beziers describing a 3D curve. xy is position, z is radius 
 var bezier_spline : Array[Array] = []
@@ -12,13 +12,13 @@ var mesh_arrays : Array = []
 var heuristic : Callable
 
 func _init() -> void:
-	mesh = ArrayMesh.new()
+	#mesh = ArrayMesh.new()
 	
-	mesh_arrays.resize(ArrayMesh.ARRAY_MAX)
-	mesh_arrays[ArrayMesh.ARRAY_VERTEX] = PackedVector3Array()
+	#mesh_arrays.resize(ArrayMesh.ARRAY_MAX)
+	#mesh_arrays[ArrayMesh.ARRAY_VERTEX] = PackedVector3Array()
 	#mesh_arrays[Array Mesh.ARRAY_TANGENT] = PackedFloat32Array()
 	#mesh_arrays[ArrayMesh.ARRAY_TEX_UV] = PackedVector2Array()
-	mesh_arrays[ArrayMesh.ARRAY_COLOR] = PackedColorArray()
+	#mesh_arrays[ArrayMesh.ARRAY_COLOR] = PackedColorArray()
 	
 	#material_override = CanvasItemMaterial.new()
 	
@@ -26,8 +26,9 @@ func _init() -> void:
 	# - Width
 	# - Color
 	# - Tangent
+	pass
 
-
+var immediate := ImmediateMesh.new()
 
 func begin():
 	#mesh_arrays = add_circle(mesh_arrays, bezier_spline.front()[0], 10.0, Color.RED)
@@ -42,7 +43,7 @@ func add_color(start:Color, end:Color):
 
 func end():
 	#mesh_arrays = add_circle(mesh_arrays, bezier_spline.front()[0], bezier_spline.front()[0].z, bezier_spline_color.front())
-	mesh_arrays = add_circle(mesh_arrays, bezier_spline.back()[3], bezier_spline.back()[3].z, bezier_spline_color.back())
+	#mesh_arrays = add_circle(mesh_arrays, bezier_spline.back()[3], bezier_spline.back()[3].z, bezier_spline_color.back())
 	
 	refresh()
 	
@@ -52,11 +53,14 @@ func _Vector2(p:Vector3) -> Vector2: return Vector2(p.x,p.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func refresh():
-	for i in range(bezier_spline.size()-1,bezier_spline.size()):
+	mesh = ImmediateMesh.new()
+	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	for i in range(0,bezier_spline.size()):
 		var arrays := []
 		
 		
-		if mesh.get_surface_count() > 0:
+		'''if mesh.get_surface_count() > 0:
 			arrays = mesh.surface_get_arrays(0)
 		else:
 			arrays.resize(ArrayMesh.ARRAY_MAX)
@@ -64,7 +68,7 @@ func refresh():
 			arrays[ArrayMesh.ARRAY_VERTEX] = PackedVector3Array()
 			#arrays[Array Mesh.ARRAY_TANGENT] = PackedFloat32Array()
 			#arrays[ArrayMesh.ARRAY_TEX_UV] = PackedVector2Array()
-			arrays[ArrayMesh.ARRAY_COLOR] = PackedColorArray()
+			arrays[ArrayMesh.ARRAY_COLOR] = PackedColorArray()'''
 		
 		
 		
@@ -100,7 +104,7 @@ func refresh():
 			var sub_color : Color = start_color.lerp(end_color, t)
 			
 			#arrays[ArrayMesh.ARRAY_VERTEX] += []
-			arrays = add_quad(arrays, 
+			add_quad_immediate(arrays, 
 					[prev_sub_point + prev_sub_normal * prev_sub_point.z, 
 					prev_sub_point - prev_sub_normal * prev_sub_point.z, 
 					sub_point - sub_normal * sub_point.z, 
@@ -114,10 +118,13 @@ func refresh():
 			prev_sub_color = sub_color
 		
 		#mesh.clear_surfaces()
-		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		#mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		
-		if mesh_arrays[ArrayMesh.ARRAY_VERTEX]: 
-			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
+		mesh.surface_end()
+		
+		
+		#if mesh_arrays[ArrayMesh.ARRAY_VERTEX]: 
+		#	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
 
 
 func add_quad(arrays:Array, quad_vertices:Array, quad_colors:Array):
@@ -138,6 +145,13 @@ func add_quad(arrays:Array, quad_vertices:Array, quad_colors:Array):
 	arrays[ArrayMesh.ARRAY_COLOR] += PackedColorArray([quad_colors[3]])
 	
 	return arrays
+
+func add_quad_immediate(arrays:Array, quad_vertices:Array, quad_colors:Array):
+	var indices = [0,1,2,0,2,3]
+	
+	for i in indices:
+		#mesh.surface_set_color(quad_colors[i])
+		mesh.surface_add_vertex_2d(Vector2(quad_vertices[i].x, quad_vertices[i].y))
 
 func add_circle(arrays:Array, p:Vector3, radius:float, color:Color, steps:=16):
 	var prev_v := radius * Vector3(cos(0), sin(0), 0)

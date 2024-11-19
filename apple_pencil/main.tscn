@@ -34,4 +34,5 @@ texture = ExtResource("3_m3ejv")
 [node name="Canvas" parent="Node2D" instance=ExtResource("2_3at1i")]
 
 [node name="stylus_debug" type="Node2D" parent="."]
+visible = false
 script = ExtResource("1_b45ca")

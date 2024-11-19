@@ -35,7 +35,7 @@ func add_point(position:Vector2, color:=Color.BLACK, width:=4.0):
 	stroke_renderer.add_color(bezier_spline_color[bezier_spline_color.size()-2], color)
 	
 	# Give the renderer a chance to update given the new information
-	#stroke_renderer.refresh()
+	stroke_renderer.refresh()
 
 func add_bezier(start:Vector3, control_1:Vector3, control_2:Vector3, end:Vector3):
 	bezier_spline.append([start, control_1, control_2, end])

@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 var color : Color = Color.WHITE
 func _process(delta: float) -> void:
 	var time := Time.get_ticks_msec() / 1000.0
-	color = Color.from_hsv(fposmod(time,1.0), 1.0, sin(time)*0.5+0.5)
+	color = Color.from_hsv(fposmod(time,1.0), 0.4, sin(time)*0.5+0.5)
 
 func create_stroke(event: InputEvent):
 	preview_stroke = PencilStroke.new()
