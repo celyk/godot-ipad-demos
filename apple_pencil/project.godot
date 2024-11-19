@@ -28,15 +28,20 @@ anti_aliasing/quality/msaa_2d=2
 [xogot]
 
 project/editorState=[{
-"column": 0,
-"line": 68,
+"column": 48,
+"line": 80,
 "path": "res://assets/canvas/StrokeRenderer.gd",
 "type": "file"
 }, {
-"column": 1,
+"column": 0,
 "current": true,
-"line": 50,
+"line": 19,
 "path": "res://assets/canvas/Stroke.gd",
+"type": "file"
+}, {
+"column": 65,
+"line": 27,
+"path": "res://assets/canvas/canvas.gd",
 "type": "file"
 }]
 project/breakpoints={
