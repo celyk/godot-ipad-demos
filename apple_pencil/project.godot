@@ -19,29 +19,26 @@ config/icon="res://icon.svg"
 
 window/size/mode=3
 window/size/borderless=true
+window/stretch/scale=2.0
 
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.2, 0.2, 0.2, 1)
 anti_aliasing/quality/msaa_2d=2
 
 [xogot]
 
 project/editorState=[{
 "column": 0,
-"line": 0,
-"path": "res://assets/canvas/StrokeRendererImmediate.gd",
-"type": "file"
-}, {
-"column": 0,
-"line": 0,
-"path": "res://assets/canvas/StrokeRenderer.gd",
-"type": "file"
-}, {
-"column": 46,
-"current": true,
-"line": 27,
+"line": 26,
 "path": "res://assets/canvas/canvas.gd",
+"type": "file"
+}, {
+"column": 35,
+"current": true,
+"line": 19,
+"path": "res://main.gd",
 "type": "file"
 }]
 project/breakpoints={

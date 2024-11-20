@@ -13,18 +13,15 @@ func _ready():
 	prev_touch_events.resize(10)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventPanGesture:
-		#global_transform = Transform2D().translated(_screen_to_local(event.relative)-_screen_to_local(Vector2(0,0)))
-		global_position += -event.delta # * global_transform[0].length()
+	if event is InputEventScreenTouch or event is InputEventScreenDrag: print(event)
+	
 	if event is InputEventScreenDrag and not is_stylus(event):
-		global_position += event.relative
-	if event is InputEventMagnifyGesture:
-		var p : Vector2 = _screen_to_local(event.position)
-		global_transform = Transform2D().translated(-p) * global_transform
-		global_transform = Transform2D().scaled(Vector2.ONE*event.factor) * global_transform
-		global_transform = Transform2D().translated(p) * global_transform
+		if event.index < touch_events.size(): touch_events[event.index] = event
+	if event is InputEventScreenTouch:
+		if event.index < touch_events.size():
+			if not event.pressed: touch_events[event.index] = null
 
-func _process0(delta: float) -> void:
+func _process(delta: float) -> void:
 	#print(prev_touch_events)
 	
 	# The first 2 touches are dragging

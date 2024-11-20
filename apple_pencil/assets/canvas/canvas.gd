@@ -10,7 +10,7 @@ var strokes : Array = []
 func _ready() -> void:
 	pass
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 			if event.pressed and preview_stroke == null:
 				create_stroke(event)
@@ -23,9 +23,14 @@ func _input(event: InputEvent) -> void:
 				pass
 
 var color : Color = Color.WHITE
+var min_radius : float = 0.5
+var max_radius : float = 4.0
 func _process(delta: float) -> void:
 	var time := Time.get_ticks_msec() / 1000.0
-	color = Color.from_hsv(fposmod(time,1.0), 0.4, sin(time)*0.5+0.5)
+	#color = get_node("ColorPickerButton").color
+	#max_radius = get_node("../../../ColorPickerButton").color
+	
+	#color = Color.from_hsv(fposmod(time,1.0), 0.4, sin(time)*0.5+0.5)
 
 func create_stroke(event: InputEvent):
 	preview_stroke = PencilStroke.new()
@@ -37,8 +42,7 @@ func create_stroke(event: InputEvent):
 
 func update_stroke(event: InputEventScreenDrag):
 	var width : float = event.pressure
-	width = lerp(0.05,1.0,width)
-	width *= 20.0
+	width = lerp(min_radius, max_radius, width)
 	width *= 1.0 / (get_parent().global_transform as Transform2D)[0].length()
 	
 	preview_stroke.add_point(_screen_to_local(event.position), color, width)
