@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpbh6ed673ds3"]
+[gd_scene load_steps=7 format=3 uid="uid://bpbh6ed673ds3"]
 
 [ext_resource type="Script" path="res://stylus_debug.gd" id="1_b45ca"]
 [ext_resource type="Script" path="res://main.gd" id="1_xud6j"]
 [ext_resource type="PackedScene" uid="uid://ojf0p1kkcf34" path="res://assets/canvas/Canvas.tscn" id="2_3at1i"]
 [ext_resource type="Script" path="res://pinch_and_zoom.gd" id="2_wru0x"]
 [ext_resource type="Texture2D" uid="uid://dmim24ntfbrh6" path="res://icon.svg" id="3_m3ejv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7f6p"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="main" type="Control"]
 layout_mode = 3
@@ -28,44 +34,62 @@ color = Color(0.278431, 0.278431, 0.278431, 1)
 metadata/_edit_lock_ = true
 
 [node name="Icon" type="Sprite2D" parent="canvas_tranformer"]
+position = Vector2(-67, -68)
 texture = ExtResource("3_m3ejv")
 
 [node name="Canvas" parent="canvas_tranformer" instance=ExtResource("2_3at1i")]
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -111.0
-offset_right = 282.0
+offset_top = -321.0
+offset_right = 441.0
 grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y7f6p")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Radius"
 
-[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Latency correction"
 
-[node name="HSlider2" type="HSlider" parent="PanelContainer/VBoxContainer"]
+[node name="HSlider2" type="HSlider" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Show debug"
 
-[node name="CheckBox" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="UI"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -84,6 +108,6 @@ ignore_rotation = false
 visible = false
 script = ExtResource("1_b45ca")
 
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/HSlider" to="." method="_on_m_value_changed"]
-[connection signal="toggled" from="PanelContainer/VBoxContainer/CheckBox" to="." method="_on_m_toggled"]
-[connection signal="color_changed" from="ColorPickerButton" to="." method="_on_m_color_changed"]
+[connection signal="value_changed" from="UI/PanelContainer/MarginContainer/VBoxContainer/HSlider" to="." method="_on_m_value_changed"]
+[connection signal="toggled" from="UI/PanelContainer/MarginContainer/VBoxContainer/CheckBox" to="." method="_on_m_toggled"]
+[connection signal="color_changed" from="UI/ColorPickerButton" to="." method="_on_m_color_changed"]

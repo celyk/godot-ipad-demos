@@ -1,9 +1,16 @@
 extends Control
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Input.use_accumulated_input = false
+	#print("screen scale ", DisplayServer.screen_get_scale())
+	
+	if not Engine.is_editor_hint() and not ProjectSettings.get_setting("display/window/dpi/allow_hidpi"):
+		ProjectSettings.set_setting(
+				"display/window/stretch/scale", 
+				ProjectSettings.get_setting("display/window/stretch/scale") * 2.0)
+		#DisplayServer.scale
+		print("hiya")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
