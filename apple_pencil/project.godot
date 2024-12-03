@@ -36,14 +36,29 @@ project/editorState=[{
 "type": "file"
 }, {
 "column": 0,
-"current": true,
-"line": 1,
+"line": 0,
 "path": "res://main.gd",
 "type": "file"
 }, {
-"column": 17,
+"column": 0,
 "line": 0,
 "path": "res://pinch_and_zoom.gd",
+"type": "file"
+}, {
+"column": 0,
+"line": 0,
+"path": "res://pen_input.gd",
+"type": "file"
+}, {
+"column": 0,
+"line": 0,
+"path": "res://assets/canvas/canvas.gd",
+"type": "file"
+}, {
+"column": 0,
+"current": true,
+"line": 0,
+"path": "res://panel_container_shrink.gd",
 "type": "file"
 }]
 project/breakpoints={

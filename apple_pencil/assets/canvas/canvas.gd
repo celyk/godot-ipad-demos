@@ -11,6 +11,13 @@ func _ready() -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
+	print(event)
+	print("Emulate mouse from touch ", Input.emulate_mouse_from_touch)
+	print("Emulate touch from mouse ", Input.emulate_touch_from_mouse)
+	
+	#Input.emulate_mouse_from_touch = false
+	#Input.emulate_touch_from_mouse = false
+	
 	if event is InputEventScreenTouch:
 			if event.pressed and preview_stroke == null:
 				create_stroke(event)
