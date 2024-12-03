@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpbh6ed673ds3"]
+[gd_scene load_steps=7 format=3 uid="uid://bpbh6ed673ds3"]
 
 [ext_resource type="Script" path="res://stylus_debug.gd" id="1_b45ca"]
 [ext_resource type="Script" path="res://main.gd" id="1_xud6j"]
 [ext_resource type="PackedScene" uid="uid://ojf0p1kkcf34" path="res://assets/canvas/Canvas.tscn" id="2_3at1i"]
 [ext_resource type="Script" path="res://pinch_and_zoom.gd" id="2_wru0x"]
 [ext_resource type="Texture2D" uid="uid://dmim24ntfbrh6" path="res://icon.svg" id="3_m3ejv"]
-[ext_resource type="Script" path="res://panel_container_shrink.gd" id="5_n5yy8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7f6p"]
 corner_radius_top_left = 16
@@ -70,7 +69,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_y7f6p")
-script = ExtResource("5_n5yy8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/PanelContainer"]
 layout_mode = 2
