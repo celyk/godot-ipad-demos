@@ -7,16 +7,18 @@ extends Node
 var preview_stroke : PencilStroke = null
 var strokes : Array = []
 
+var allow_touch_to_draw := true
+
 func _ready() -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	print(event)
-	print("Emulate mouse from touch ", Input.emulate_mouse_from_touch)
-	print("Emulate touch from mouse ", Input.emulate_touch_from_mouse)
+	#print(event)
+	#print("Emulate mouse from touch ", Input.emulate_mouse_from_touch)
+	#print("Emulate touch from mouse ", Input.emulate_touch_from_mouse)
 	
 	#Input.emulate_mouse_from_touch = false
-	#Input.emulate_touch_from_mouse = false
+	Input.emulate_touch_from_mouse = true
 	
 	if event is InputEventScreenTouch:
 			if event.pressed and preview_stroke == null:
@@ -24,10 +26,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			elif not event.pressed and preview_stroke != null:
 				submit_stroke(event)
 	elif event is InputEventScreenDrag and preview_stroke != null:
-			if is_stylus(event):
+			if allow_touch_to_draw or is_stylus(event):
 				update_stroke(event)
-			else:
-				pass
 
 var color : Color = Color.WHITE
 var min_radius : float = 0.5
@@ -51,6 +51,9 @@ func update_stroke(event: InputEventScreenDrag):
 	var width : float = event.pressure
 	width = lerp(min_radius, max_radius, width)
 	width *= 1.0 / (get_parent().global_transform as Transform2D)[0].length()
+	
+	#print(width)
+	#width = 1.0
 	
 	preview_stroke.add_point(_screen_to_local(event.position), color, width)
 

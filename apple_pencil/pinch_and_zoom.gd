@@ -23,14 +23,27 @@ func _input(event: InputEvent) -> void:
 		global_transform = Transform2D().translated(-p) * global_transform
 		global_transform = Transform2D().scaled(Vector2.ONE*event.factor) * global_transform
 		global_transform = Transform2D().translated(p) * global_transform
+	
+	if event is InputEventMouseMotion:
+		if Input.get_mouse_button_mask() & MOUSE_BUTTON_MASK_MIDDLE:
+			global_position += event.relative 
+	if event is InputEventMouseButton:
+		var p : Vector2 = _screen_to_local(event.position)
+		var rate := 0.04
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			global_transform = Transform2D().translated(-p) * global_transform
+			global_transform = Transform2D().scaled(Vector2.ONE * (1.0 + event.factor * rate)) * global_transform
+			global_transform = Transform2D().translated(p) * global_transform
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			global_transform = Transform2D().translated(-p) * global_transform
+			global_transform = Transform2D().scaled(Vector2.ONE / (1.0 + event.factor * rate)) * global_transform
+			global_transform = Transform2D().translated(p) * global_transform
 
 func _process0(delta: float) -> void:
 	#print(prev_touch_events)
 	
 	# The first 2 touches are dragging
 	if prev_touch_events[0] and prev_touch_events[1] and touch_events[0] and touch_events[1]:
-		print("hi")
-		
 		global_transform = _get_pinch_transform(
 				_screen_to_local(prev_touch_events[0].position), 
 				_screen_to_local(prev_touch_events[1].position),
