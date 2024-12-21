@@ -94,6 +94,13 @@ text = "Show debug"
 [node name="CheckBox" type="CheckBox" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="Label4" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Allow touch draw"
+
+[node name="CheckBox2" type="CheckBox" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="ColorPickerButton" type="ColorPickerButton" parent="UI"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -115,4 +122,5 @@ script = ExtResource("1_b45ca")
 
 [connection signal="value_changed" from="UI/MarginContainer/PanelContainer/VBoxContainer/HSlider" to="." method="_on_m_value_changed"]
 [connection signal="toggled" from="UI/MarginContainer/PanelContainer/VBoxContainer/CheckBox" to="." method="_on_m_toggled"]
+[connection signal="toggled" from="UI/MarginContainer/PanelContainer/VBoxContainer/CheckBox2" to="." method="_on_check_box_2_toggled"]
 [connection signal="color_changed" from="UI/ColorPickerButton" to="." method="_on_m_color_changed"]

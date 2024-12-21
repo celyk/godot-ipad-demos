@@ -23,3 +23,7 @@ func _on_m_value_changed(value:float):
 
 func _on_m_toggled(toggled_on: bool) -> void:
 	$stylus_debug.visible = toggled_on
+
+
+func _on_check_box_2_toggled(toggled_on: bool) -> void:
+	Input.emulate_touch_from_mouse = toggled_on
