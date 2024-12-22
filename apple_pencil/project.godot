@@ -55,10 +55,10 @@ project/editorState=[{
 "path": "res://assets/canvas/canvas.gd",
 "type": "file"
 }, {
-"column": 0,
+"column": 40,
 "current": true,
-"line": 0,
-"path": "res://panel_container_shrink.gd",
+"line": 5,
+"path": "res://TouchTracker.gd",
 "type": "file"
 }]
 project/breakpoints={
