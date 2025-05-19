@@ -21,6 +21,10 @@ window/size/mode=3
 window/size/borderless=true
 window/stretch/scale=2.0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/vstroke/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="mobile"

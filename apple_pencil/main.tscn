@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpbh6ed673ds3"]
 
-[ext_resource type="Script" uid="uid://bg13wxk7fogmu" path="res://stylus_debug.gd" id="1_b45ca"]
+[ext_resource type="Script" uid="uid://bg13wxk7fogmu" path="res://scripts/stylus_debug.gd" id="1_b45ca"]
 [ext_resource type="Script" uid="uid://b0oc7rv6q8kpn" path="res://main.gd" id="1_xud6j"]
-[ext_resource type="PackedScene" uid="uid://ojf0p1kkcf34" path="res://assets/canvas/Canvas.tscn" id="2_3at1i"]
-[ext_resource type="Script" uid="uid://daa3oky4anvi7" path="res://pinch_and_zoom.gd" id="2_wru0x"]
+[ext_resource type="PackedScene" uid="uid://ojf0p1kkcf34" path="res://addons/vstroke/canvas/Canvas.tscn" id="2_3at1i"]
+[ext_resource type="Script" uid="uid://daa3oky4anvi7" path="res://scripts/pinch_and_zoom.gd" id="2_wru0x"]
 [ext_resource type="Texture2D" uid="uid://dmim24ntfbrh6" path="res://icon.svg" id="3_m3ejv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7f6p"]
