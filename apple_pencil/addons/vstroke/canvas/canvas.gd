@@ -43,7 +43,7 @@ func create_stroke(event: InputEvent):
 	preview_stroke = PencilStroke.new()
 	
 	preview_stroke.begin()
-	preview_stroke.add_point(_screen_to_local(event.position), color, 0.0)
+	#preview_stroke.add_point(_screen_to_local(event.position), color, 0.0)
 	
 	get_parent().add_child(preview_stroke)
 

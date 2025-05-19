@@ -8,7 +8,7 @@ var bezier_spline_color : Array[Color] = []
 
 var mesh_arrays : Array = []
 
-# Todo - apply the heuristic to optimizae the stroke rendering
+# TODO - apply the heuristic to optimizae the stroke rendering
 var heuristic : Callable
 
 func _init() -> void:
@@ -28,11 +28,13 @@ func _init() -> void:
 	# - Tangent
 
 
-
+var _beginning := false
+var _ending := false
 func begin():
-	#mesh_arrays = add_circle(mesh_arrays, bezier_spline.front()[0], 10.0, Color.RED)
+	_beginning = true
 	
-	print(mesh_arrays)
+	#print(mesh_arrays)
+	pass
 
 func add_bezier(start:Vector3, control_1:Vector3, control_2:Vector3, end:Vector3):
 	bezier_spline.append([start, control_1, control_2, end])
@@ -41,18 +43,20 @@ func add_color(start:Color, end:Color):
 	bezier_spline_color.append(end)
 
 func end():
+	_ending = true
+	
 	#mesh_arrays = add_circle(mesh_arrays, bezier_spline.front()[0], bezier_spline.front()[0].z, bezier_spline_color.front())
-	mesh_arrays = add_circle(mesh_arrays, bezier_spline.back()[3], bezier_spline.back()[3].z, bezier_spline_color.back())
+	#mesh_arrays = add_circle(mesh_arrays, bezier_spline.back()[3], bezier_spline.back()[3].z, bezier_spline_color.back())
 	
 	refresh()
 	
-	print(mesh_arrays)
+	#print(mesh_arrays)
 
 func _Vector2(p:Vector3) -> Vector2: return Vector2(p.x,p.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func refresh():
-	for i in range(bezier_spline.size()-1,bezier_spline.size()):
+	for i in range(bezier_spline.size()-1, bezier_spline.size()):
 		var arrays := []
 		
 		
@@ -107,17 +111,37 @@ func refresh():
 					sub_point + sub_normal * sub_point.z],
 					[prev_sub_color, prev_sub_color, sub_color, sub_color])
 			
+			# Handle special case
+			var angle_threshold_degrees = 45.0
+			if prev_sub_normal.dot(sub_normal) < cos( deg_to_rad(angle_threshold_degrees) ):
+				arrays = add_circle(arrays, sub_point, sub_point.z, sub_color)
+				#arrays = add_circle(arrays, sub_point, sub_point.z, Color.PINK)
+				#mesh_arrays = add_circle(mesh_arrays, sub_point, sub_point.z, Color.RED)
+			
+			
 			#print(arrays)
 			
 			prev_sub_point = sub_point
 			prev_sub_normal = sub_normal
 			prev_sub_color = sub_color
 		
+		if _beginning:
+			arrays = add_circle(arrays, bezier_spline.front()[0], bezier_spline.front()[3].z, bezier_spline_color.front())
+			#arrays = add_circle(arrays, bezier_spline.front()[0], bezier_spline.front()[3].z, Color.GREEN)
+			_beginning = false
+		
+		if _ending:
+			arrays = add_circle(arrays, bezier_spline.back()[3], bezier_spline.back()[3].z, bezier_spline_color.back())
+			#arrays = add_circle(arrays, bezier_spline.back()[3], bezier_spline.back()[3].z, Color.RED)
+			_ending = false
+			
+		
+		
 		#mesh.clear_surfaces()
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		
-		if mesh_arrays[ArrayMesh.ARRAY_VERTEX]: 
-			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
+		#if mesh_arrays[ArrayMesh.ARRAY_VERTEX]: 
+		#	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
 
 
 func add_quad(arrays:Array, quad_vertices:Array, quad_colors:Array):

@@ -13,7 +13,9 @@ func _ready():
 	prev_touch_events.resize(10)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventScreenTouch or event is InputEventScreenDrag: print(event)
+	if event is InputEventScreenTouch or event is InputEventScreenDrag: 
+		#print(event)
+		pass
 	
 	if event is InputEventScreenDrag and not is_stylus(event):
 		if event.index < touch_events.size(): touch_events[event.index] = event
@@ -26,8 +28,6 @@ func _process(delta: float) -> void:
 	
 	# The first 2 touches are dragging
 	if prev_touch_events[0] and prev_touch_events[1] and touch_events[0] and touch_events[1]:
-		print("hi")
-		
 		global_transform = _get_pinch_transform(
 				_screen_to_local(prev_touch_events[0].position), 
 				_screen_to_local(prev_touch_events[1].position),
